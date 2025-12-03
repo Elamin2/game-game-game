@@ -1,5 +1,6 @@
 import Rectangle from './Rectangle.js'
 import InputHandler from './InputHandler.js'
+import Kvadrat from './kvadrat.js'
 
 export default class Game {
     constructor(width, height) {
@@ -11,8 +12,12 @@ export default class Game {
         // Skapa alla objekt i spelet
         this.gameObjects = [
             new Rectangle(this, 50, 50, 100, 100, 'red'),
-            new Rectangle(this, 200, 150, 150, 75, 'green')
+            new Rectangle(this, 200, 150, 150, 75, 'green'),
+            new Kvadrat(this, 300, 200, 80, 80, 'blue'),
+           
         ]
+
+    
     }
 
     update(deltaTime) {
@@ -25,6 +30,7 @@ export default class Game {
         }
         if (this.inputHandler.keys.has('b')) {
             this.gameObjects[1].velocityY -= 0.001 * deltaTime
+       
         }
     }
 
