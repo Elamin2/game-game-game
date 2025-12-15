@@ -4,6 +4,8 @@ import Platform from './Platform.js'
 import Coin from './Coin.js'
 import Enemy from './Enemy.js'
 import UserInterface from './UserInterface.js'
+import Silvercoin from './Silvercoin.js'
+
 
 export default class Game {
     constructor(width, height) {
@@ -47,6 +49,13 @@ export default class Game {
             new Coin(this, 380, this.height - 360),
             new Coin(this, 420, this.height - 360),
         ]
+        this.silverCoins = [
+            new Silvercoin(this, 300, this.height - 180),
+            new Silvercoin(this, 500, this.height - 240),
+            new Silvercoin(this, 130, this.height - 280),
+            new Silvercoin(this, 570, this.height - 160),
+            new Silvercoin(this, 400, this.height - 320),
+        ]
 
         // Skapa fiender i nivån
         this.enemies = [
@@ -68,6 +77,8 @@ export default class Game {
         
         // Uppdatera mynt
         this.coins.forEach(coin => coin.update(deltaTime))
+
+        this.silverCoins.forEach(silvercoin => silvercoin.update(deltaTime))
         
         // Uppdatera fiender
         this.enemies.forEach(enemy => enemy.update(deltaTime))
@@ -112,6 +123,14 @@ export default class Game {
                 coin.markedForDeletion = true
             }
         })
+        this.silverCoins.forEach(silvercoin => {
+            if (this.player.intersects(silvercoin) && !silvercoin.markedForDeletion) {
+                // Plocka upp myntet
+                this.score += silvercoin.value
+                this.coinsCollected++
+                silvercoin.markedForDeletion = true
+            }
+        })
         
         // Kontrollera kollision med fiender
         this.enemies.forEach(enemy => {
@@ -124,6 +143,8 @@ export default class Game {
         // Ta bort alla objekt markerade för borttagning
         this.coins = this.coins.filter(coin => !coin.markedForDeletion)
         this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion)
+        
+        this.silverCoins = this.silverCoins.filter(silvercoin => !silvercoin.markedForDeletion)
 
         // Förhindra att spelaren går utöver skärmen horisontellt
         if (this.player.x < 0) {
@@ -140,6 +161,8 @@ export default class Game {
         
         // Rita mynt
         this.coins.forEach(coin => coin.draw(ctx))
+
+        this.silverCoins.forEach(silvercoin => silvercoin.draw(ctx))
         
         // Rita fiender
         this.enemies.forEach(enemy => enemy.draw(ctx))
