@@ -10,7 +10,7 @@ export default class Rectangle extends GameObject {
         this.velocityY = 0
         
         // Studs-faktor (1.0 = perfekt studs, 0.8 = tappar energi)
-        this.bounce = 1.0
+        this.bounce = 2.0
     }
 
     update(deltaTime) {

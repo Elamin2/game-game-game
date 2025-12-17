@@ -19,7 +19,7 @@ export default class Player extends GameObject {
         this.isGrounded = false // om spelaren står på marken
         
         // Health system
-        this.maxHealth = 3
+        this.maxHealth = 5
         this.health = this.maxHealth
         this.invulnerable = false // Immun mot skada efter att ha blivit träffad
         this.invulnerableTimer = 0
@@ -40,7 +40,7 @@ export default class Player extends GameObject {
         }
 
         // Hopp - endast om spelaren är på marken
-        if (this.game.inputHandler.keys.has(' ') && this.isGrounded) {
+        if (this.game.inputHandler.keys.has('ArrowUp') && this.isGrounded) {
             this.velocityY = this.jumpPower
             this.isGrounded = false
         }

@@ -1,7 +1,7 @@
 import GameObject from './GameObject.js'
 
 export default class Silvercoin extends GameObject {
-    constructor(game, x, y, size = 100, value = 50) {
+    constructor(game, x, y, size = 25, value = 50) {
         super(game, x, y, size, size)
         this.size = size
         this.color = 'silver'

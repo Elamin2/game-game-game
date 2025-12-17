@@ -3,7 +3,7 @@ import GameObject from './GameObject.js'
 export default class Enemy extends GameObject {
     constructor(game, x, y, width, height, patrolDistance = null) {
         super(game, x, y, width, height)
-        this.color = 'red' // Röd
+        this.color = 'blue' 
         
         // Fysik
         this.velocityX = 0
@@ -14,8 +14,8 @@ export default class Enemy extends GameObject {
         this.startX = x
         this.patrolDistance = patrolDistance
         this.endX = patrolDistance !== null ? x + patrolDistance : null
-        this.speed = 0.1
-        this.direction = 1 // 1 = höger, -1 = vänster
+        this.speed = 0.5
+        this.direction = 4 // 1 = höger, -1 = vänster
         
         this.damage = 1 // Hur mycket skada fienden gör
     }
@@ -37,7 +37,7 @@ export default class Enemy extends GameObject {
             // Om vi har en patrolldistans, vänd vid ändpunkter
             if (this.patrolDistance !== null) {
                 if (this.x >= this.endX) {
-                    this.direction = -1
+                    this.direction = -4
                     this.x = this.endX
                 } else if (this.x <= this.startX) {
                     this.direction = 1
